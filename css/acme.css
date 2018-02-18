@@ -1,0 +1,442 @@
+/* 
+    Created on : Jan 20, 2018, 10:21:57 AM
+    Author     : Joseph walker
+*/
+
+* {
+    box-sizing: border-box;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    background: url(../images/site/background.jpg) center center fixed;
+}
+
+header {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+#logo {
+    width: 114.75px;
+    height: 45.75px;
+}
+#account-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#account-img a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    max-height: 20px;
+}
+
+#account-img a:link {
+    text-decoration: none;
+    color: #000000;
+}
+
+#account-img a:hover {
+    text-decoration: underline;
+}
+
+#account-img a:visited {
+    color: #000000;
+}
+
+#account {
+    width: 15%;
+    height: auto;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+nav {
+    background-color: #de2226;
+    padding: 8px 0px;
+}
+
+noscript {
+    margin-left: 10px;
+    color: #ffffff;
+    font-size: 2em;
+    background-color: #de2226;
+}
+
+.navbar {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: .8em;
+}
+
+.navbar a:link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.navbar a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+.navbar a:visited {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+main {
+    background-color: #ffffff;
+    min-height: 100px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin: 0px;
+}
+
+#advertisement-banner {
+    background-image: url("/acme/images/site/rocketfeature.jpg");
+    background-size: cover;
+    min-height: 400px;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 8px;
+}
+
+#rocket-ad {
+    color: #990033;
+    width: 250px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-left: 5px;
+}
+
+#btnitem {
+    margin: 245px 0 0 0;
+}
+
+.colMain {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+
+
+h1 {
+    padding: 10px 0;
+    margin-left: 5px;
+}
+
+form {
+    width: 90%;
+}
+
+.formLayout {
+    min-width: 100%;
+    min-height: 220px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+#catForm {
+    min-height: 0px;
+}
+
+.formLayout li {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+#registerBtn {
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    background-color: rgba( 220, 38, 46, .85);
+    border-color: #c2cfd6;
+    border-radius: 5px;
+    min-height: 2.5em;
+    font-size: 1em;
+}
+
+#registerBtn a {
+    text-decoration: none;
+    color: #000000;
+    
+}
+
+#catLink, #prodLink {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 5px 10px;
+    margin: 20px 0 20px 10px;
+    background-color: #de2226;
+}
+
+#message {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#categoryMenu {
+    /*width: 50%;*/
+    margin-right: 80%;
+}
+
+input {
+    border: 1px solid;
+    border-color: #c2cfd6;
+    border-radius: 5px;
+    min-height: 2.5em;
+    font-size: 1em;
+}
+
+input[type=submit] {
+    background-color: rgba( 128, 128, 128, .8);
+}
+
+h3 {
+    margin: 20px 0 10px 5px;
+}
+
+#featured-recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+
+figure {
+    margin: 0;
+    width: 150px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+#figure1 {
+    margin-bottom: 10px;
+}
+
+figcaption {
+    width: 100px;
+    text-align: center;
+}
+
+#reviews {
+    padding-bottom: 20px;
+}
+
+#reviews ul {
+    padding-left: 15px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 200px;
+}
+
+#item-display {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+
+#item-image {
+    display: flex;
+    justify-content: center;
+}
+
+#item-info {
+    margin: 10px 0px;
+    max-width: 95%;
+    display: flex;
+    flex-flow: column nowrap;
+
+}
+
+#side-align {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#side-align li {
+    max-width: 50%;
+}
+
+
+
+.bold {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#manufacturer {
+    margin: 10px 35% 0px 10px;
+}
+
+#item-reviews {
+    margin: 10px 0 0 10px;
+}
+
+#price-align {
+    display: flex;
+
+}
+
+.price {
+    margin: 10px 10px 0 auto;
+    color: #de2226;
+    font-size: 2em;
+}
+
+#price {
+    margin: 10px 0 0 0;
+    color: #de2226;
+    font-size: 2em;
+}
+
+hr {
+    border-width: 2px;
+    border-color: #000000;
+    width: 97.5%;
+    margin: 8px 0px;
+}
+
+footer {
+    background-color: #ffffff;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    /*margin: 0px 4px;
+    border-top: 5px solid;*/
+}
+
+p {
+    margin: 0px 15px;
+    padding: 0px;
+}
+
+@media only screen and (min-width: 775px) {
+    html {
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+    }
+
+    #page-display {
+        min-width: 750px;
+        max-width: 1000px;
+    }
+    
+    #logo {
+        width: 229.5px;
+        height: 91.5px;
+        margin: 0 0 0 5px;
+    }
+    
+    #account-img {
+        align-items: flex-end;
+        margin: 0 5px 5px 0;
+       
+    }
+    
+    #account {
+        width: 20%;
+    }
+
+    .navbar {
+        justify-content: flex-start;
+        font-size: 1.5em;
+    }
+    
+    .navbar li {
+        padding: 0 5px;
+    }
+
+    #advertisement-banner {
+        min-height: 400px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    #rocket-ad {
+        padding-top: 20px;
+        margin-right: 5%;
+    }
+
+    #btnitem {
+        margin-top: 10px;
+    }
+
+    #featured-content {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #recipes {
+        max-width: 40%;
+    }
+
+    #reviews {
+        max-width: 40%;
+    }
+
+    #item-display {
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    #item-image {
+        width: 40%;
+    }
+
+    #item-image img {
+        max-width: 80%;
+    }
+
+    #item-info {
+        max-width: 40%;
+    }
+
+    #manufacturer {
+        margin-right: 40%;
+    }
+    
+    form {
+    width: 50%;
+    }
+
+
+}
