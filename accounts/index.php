@@ -7,6 +7,8 @@ require_once '../library/connections.php';
 require_once '../model/acme-model.php';
 // Get the acme accounts model for use as needed
 require_once '../model/accounts-model.php';
+// Get the functions library
+require_once '../library/functions.php';
 
 
 // Get the array of categories
@@ -15,12 +17,7 @@ $categories = getCategories();
 /*var_dump($categories);
 exit;*/
 
-$navList = '<ul class="navbar">';
-$navList .= "<li><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
-foreach ($categories as $category) {
-$navList .= "<li><a href='/acme/index.php?action=".urlencode($category['categoryName'])."' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
-}
-$navList .= '</ul>';
+$navList = buildNavList($categories);
 
 //echo $navList;
 //exit;
@@ -39,21 +36,36 @@ switch ($action){
         break;
     case 'register':
         // Filter and store the data
-        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname');
-        $clientLastname = filter_input(INPUT_POST, 'clientLastname');
-        $clientEmail = filter_input(INPUT_POST, 'clientEmail');
-        $clientPassword = filter_input(INPUT_POST, 'clientPassword');
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
         //echo "$clientFirstname, $clientLastname, $clientEmail, $clientPassword";
+        $clientEmail = checkEmail($clientEmail);
+        $checkPassword = checkPassword($clientPassword);
+        
+        //verify that a matching email doesn't exist
+        $existingEmail = checkEmailExists($clientEmail);
+        echo "$existingEmail";
+        // If the email already exists return message
+        if($existingEmail){
+          $message = '<p class="notice">That email address already exists. Do you want to login instead?</p>';
+          include '../view/login.php';
+          exit;
+}
+
         
 
         // Check for missing data
-        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)){
+        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)){
         $message = '<p>Please provide information for all empty form fields.</p>';
         include '../view/registration.php';
         exit; }
         
         // Send the data to the model
-        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
         
         // Check and report the result
         if($regOutcome === 1){
@@ -65,6 +77,19 @@ switch ($action){
          include '../view/registration.php';
          exit;
         }
+        
+        break;
+    case 'Login':
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+        
+        $clientEmail = checkEmail($clientEmail);
+        $checkPassword = checkPassword($clientPassword);
+        
+        if(empty($clientEmail) || empty($checkPassword)){
+        $message = '<p>Please fill in the Email and Password fields.</p>';
+        include '../view/login.php';
+        exit; }
         
         break;
     default:

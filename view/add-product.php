@@ -1,3 +1,18 @@
+<?php
+    $catList = '<select name="categoryId" id="categoryMenu">';
+    $catList .= "<option>Choose a Category </option>";
+    foreach ($categories as $category) {
+        $catList .= "<option value='$category[categoryId]'";
+        if(isset($categoryId)) {
+            if($category['categoryId'] === $categoryId){
+                $catList .= ' selected ';
+            }
+        }
+        $catList .= ">$category[categoryName]</option>";
+    }
+    $catList .= '</select>';
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,47 +44,47 @@
             </li>
             <li>
                 <label for="invName">Product Name</label>
-                <input type="text" id="invName" name="invName">
+                <input type="text" id="invName" name="invName" <?php if(isset($invName)){echo "value='$invName'";} ?> required>
             </li>
             <li>
                 <label for="invDescription">Description</label>
-                <input type="text" id="invDescription" name="invDescription">
+                <input type="text" id="invDescription" name="invDescription" <?php if(isset($invDescription)){echo "value='$invDescription'";} ?> required>
             </li>
             <li>
                 <label for="invImage">Image</label>
-                <input type="text" id="invImage" name="invImage">
+                <input type="text" id="invImage" name="invImage" <?php if(isset($invImage)){echo "value='$invImage'";} ?> required>
             </li>
             <li>
                 <label for="invThumbnail">Thumbnail</label>
-                <input type="text" id="invThumbnail" name="invThumbnail">
+                <input type="text" id="invThumbnail" name="invThumbnail" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} ?> required>
             </li>
             <li>
                 <label for="invPrice">Price</label>
-                <input type="text" id="invPrice" name="invPrice">
+                <input type="text" id="invPrice" name="invPrice" <?php if(isset($invPrice)){echo "value='$invPrice'";} ?> required>
             </li>
             <li>
                 <label for="invStock">Stock</label>
-                <input type="text" id="invStock" name="invStock">
+                <input type="text" id="invStock" name="invStock" <?php if(isset($invStock)){echo "value='$invStock'";} ?> required>
             </li>
             <li>
                 <label for="invSize">Size</label>
-                <input type="text" id="invSize" name="invSize">
+                <input type="text" id="invSize" name="invSize" <?php if(isset($invSize)){echo "value='$invSize'";} ?> required>
             </li>
             <li>
                 <label for="invWeight">Weight</label>
-                <input type="text" id="invWeight" name="invWeight">
+                <input type="text" id="invWeight" name="invWeight" <?php if(isset($invWeight)){echo "value='$invWeight'";} ?> required>
             </li>
             <li>
                 <label for="invLocation">Location</label>
-                <input type="text" id="invLocation" name="invLocation">
+                <input type="text" id="invLocation" name="invLocation" <?php if(isset($invLocation)){echo "value='$invLocation'";} ?> required>
             </li>
             <li>
                 <label for="invVendor">Vendor</label>
-                <input type="text" id="invVendor" name="invVendor">
+                <input type="text" id="invVendor" name="invVendor" <?php if(isset($invVendor)){echo "value='$invVendor'";} ?> required>
             </li>
             <li>
                 <label for="invStyle">Style</label>
-                <input type="text" id="invStyle" name="invStyle">
+                <input type="text" id="invStyle" name="invStyle" <?php if(isset($invStyle)){echo "value='$invStyle'";} ?> required>
             </li>
             <li>
                 <input type="submit" class="submit" value="Add Product">

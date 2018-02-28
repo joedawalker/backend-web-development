@@ -26,7 +26,7 @@
         <ul class="formLayout" id="catForm">
             <li>
                 <label for="categoryName">Category Name</label>
-                <input type="text" id="categoryName" name="categoryName">
+                <input type="text" id="categoryName" name="categoryName" required>
             </li>
             <li>
                 <input type="submit" class="submit" value="Add Category">

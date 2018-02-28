@@ -1,4 +1,4 @@
-/* 
+/*
     Created on : Jan 20, 2018, 10:21:57 AM
     Author     : Joseph walker
 */
@@ -21,13 +21,14 @@ header {
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
-    
+
 }
 
 #logo {
     width: 114.75px;
     height: 45.75px;
 }
+
 #account-img {
     display: flex;
     flex-direction: row;
@@ -175,6 +176,10 @@ form {
     margin: 5px 0;
 }
 
+.pswdSpan {
+    margin: 0 0 5px 0;
+}
+
 #registerBtn {
     align-items: center;
     justify-content: center;
@@ -189,10 +194,11 @@ form {
 #registerBtn a {
     text-decoration: none;
     color: #000000;
-    
+
 }
 
-#catLink, #prodLink {
+#catLink,
+#prodLink {
     text-decoration: none;
     color: #ffffff;
     padding: 5px 10px;
@@ -206,8 +212,7 @@ form {
 }
 
 #categoryMenu {
-    /*width: 50%;*/
-    margin-right: 80%;
+    width: 12em;
 }
 
 input {
@@ -358,19 +363,19 @@ p {
         min-width: 750px;
         max-width: 1000px;
     }
-    
+
     #logo {
         width: 229.5px;
         height: 91.5px;
         margin: 0 0 0 5px;
     }
-    
+
     #account-img {
         align-items: flex-end;
         margin: 0 5px 5px 0;
-       
+
     }
-    
+
     #account {
         width: 20%;
     }
@@ -379,7 +384,7 @@ p {
         justify-content: flex-start;
         font-size: 1.5em;
     }
-    
+
     .navbar li {
         padding: 0 5px;
     }
@@ -433,9 +438,9 @@ p {
     #manufacturer {
         margin-right: 40%;
     }
-    
+
     form {
-    width: 50%;
+        width: 50%;
     }
 
 
