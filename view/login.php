@@ -22,7 +22,7 @@
         echo $message;
     }
     ?>
-    <form method="post">
+    <form method="post" action="/acme/accounts/">
         <ul class="formLayout">
             <li>
                 <label for="clientEmail">Email address (required)</label>

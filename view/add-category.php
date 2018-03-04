@@ -1,4 +1,8 @@
-<!doctype html>
+<?php
+// Verify user is an administrator
+if(!isset($_SESSION) || $_SESSION['clientData']['clientLevel'] < 2){
+    header('Location: /acme/');
+} ?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

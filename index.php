@@ -1,7 +1,8 @@
 <?php
 //This is the acme controller
 
-
+// Create or access a Session
+session_start();
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){
@@ -15,6 +16,8 @@ require_once 'model/acme-model.php';
 // Get the functions library
 require_once 'library/functions.php';
 
+
+
 // Get the array of categories
 $categories = getCategories();
 
@@ -22,9 +25,13 @@ $categories = getCategories();
 exit;*/
 
 $navList = buildNavList($categories);
-
 //echo $navList;
 //exit;
+
+// Check if the firstname cookie exists, get its value
+if(isset($_COOKIE['firstname'])){
+  $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+}
 
 switch ($action){
  case "":

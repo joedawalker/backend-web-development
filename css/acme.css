@@ -327,6 +327,25 @@ figcaption {
     font-size: 2em;
 }
 
+#clientInfo {
+    padding: 0 0 20px 12px;
+}
+
+#adminLink:link {
+    text-decoration: none;
+    color: #000000;
+}
+
+#adminLink:hover {
+    text-decoration: none;
+    color: grey;
+}
+
+#adminLink:visited {
+    text-decoration: none;
+    color: #de2226;
+}
+
 hr {
     border-width: 2px;
     border-color: #000000;
