@@ -197,6 +197,23 @@ form {
 
 }
 
+.upClientForm {
+    margin: 0 0 0 20px;
+}
+
+#pmessage,
+#upmessage {
+    color: #de2226;
+}
+
+#pswdH2 {
+    margin: 25px 0 5px 10px;
+}
+
+#pswdForm ul {
+    min-height: 0;
+}
+
 #catLink,
 #prodLink {
     text-decoration: none;
@@ -207,7 +224,7 @@ form {
 }
 
 #message {
-    padding-bottom: 10px;
+    padding: 20px 0 10px 0;
     margin-bottom: 10px;
 }
 
@@ -327,23 +344,54 @@ figcaption {
     font-size: 2em;
 }
 
-#clientInfo {
-    padding: 0 0 20px 12px;
+.acctConf {
+    margin: 0 0 10px 15px;
 }
 
-#adminLink:link {
+#clientInfo {
+    padding: 0 0 20px 15px;
+}
+
+.adminHeading {
+    margin: 10px 0 0 10px;
+}
+
+.adminLink:link {
     text-decoration: none;
     color: #000000;
 }
 
-#adminLink:hover {
+.adminLink:visited {
+    text-decoration: none;
+    color: #de2226;
+}
+
+.adminLink:hover {
     text-decoration: none;
     color: grey;
 }
 
-#adminLink:visited {
+#prodTable {
+    padding: 10px;
+}
+
+#prodTable tr:nth-child(odd) {
+    background-color: rgba(128, 128, 128, .2);
+}
+
+#prodTable a:link {
     text-decoration: none;
     color: #de2226;
+}
+
+#prodTable a:visited {
+    text-decoration: none;
+    color: #000000;
+}
+
+#prodTable a:hover {
+    text-decoration: none;
+    color: grey;
 }
 
 hr {

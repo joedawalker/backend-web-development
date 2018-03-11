@@ -1,6 +1,9 @@
 <?php
 //This is the accounts controller
-
+/* accounts super user 
+ * Email: admin@cit336.net
+ * Password: Sup3rU$er
+ */
 session_start();
 
 // Get the database connection file
@@ -20,7 +23,7 @@ $categories = getCategories();
 exit;*/
 
 $navList = buildNavList($categories);
-$adminLink = '<p><a href="/acme/products/" id="adminLink">Product Manangement</a></p>';
+$adminLink = '<p><a href="/acme/products/" class="adminLink">Product Manangement</a></p>';
 //echo $navList;
 //exit;
 
@@ -28,6 +31,7 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){
  $action = filter_input(INPUT_GET, 'action');
 }
+
 
 switch ($action){
     case 'login':
@@ -89,7 +93,7 @@ switch ($action){
         $checkPassword = checkPassword($clientPassword);
         
         if(empty($clientEmail) || empty($checkPassword)){
-        $message = '<p>Please fill in the Email and Password fields.</p>';
+            $message = '<p>Please fill in the Email and Password fields.</p>';
         include '../view/login.php';
         exit; }
         
@@ -102,9 +106,9 @@ switch ($action){
         // If the hashes don't match create an error
         // and return to the login view
         if (!$hashCheck) {
-          $message = '<p class="notice">Please check your password and try again.</p>';
-          include '../view/login.php';
-          exit;
+            $message = '<p class="notice">Please check your password and try again.</p>';
+            include '../view/login.php';
+            exit;
         }
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
@@ -117,11 +121,106 @@ switch ($action){
         // Send them to the admin view
         include '../view/admin.php';
         exit;
-        
         break;
-    case('Logout'):
+    case'Logout':
         session_destroy();
         header('Location: /acme/');
+        break;
+    case 'editClient':
+        $clientInfo = getClientInfo($_SESSION['clientData']['clientId']);
+        if(count($clientInfo)<1){
+            $upmessage = 'Sorry, account information could not be found.';
+        }
+        include '../view/client-update.php';
+        break;
+    case 'updateClient':
+        // Filter and store the data
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        $clientEmail = checkEmail($clientEmail);
+        
+        if($_SESSION['clientData']['clientEmail'] != $clientEmail) {
+             //verify that a matching email doesn't exist
+            $existingEmail = checkEmailExists($clientEmail);
+            echo "$existingEmail";
+            
+            // If the email already exists return message
+            if($existingEmail){
+              $upmessage = '<p class="notice">That email address is already associated with another account.</p>';
+              include '../view/client-update.php';
+              exit;
+            }
+        }
+
+        
+
+        // Check for missing data
+        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)){
+            $upmessage = '<p id="upmessage">Please provide information for all empty form fields.</p>';
+            include '../view/client-update.php';
+        exit; }
+        
+        $updateResult = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+        
+        // Check and report the result
+        if ($updateResult) {
+            $clientData = getClient($clientEmail);
+            array_pop($clientData);
+            // Store the array into the session
+            $_SESSION['clientData'] = $clientData;
+            $message = "<p id='message'>$clientFirstname $clientLastname your account was updated successfully.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /acme/accounts/');
+            exit;
+        } else {
+            $upmessage = "<p id='upmessage'>Sorry, system failed to update your account. Please try again.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
+        break;
+    
+    case 'changePass':
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+        $checkPassword = checkPassword($clientPassword);
+        
+        if(empty($checkPassword)){
+            $pmessage = '<p id="pmessage">Password rejected. Please enter a new password using the correct password format.</p>';
+            // get original client info so preceding form remains filled in;
+            $clientInfo = getClientInfo($_SESSION['clientData']['clientId']);
+            if(count($clientInfo)<1){
+             $upmessage = 'Sorry, account information could not be found.';
+            }
+        include '../view/client-update.php';
+        exit; }
+        
+        //make password unreadable
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+        
+        $pswdResult = updatePassword($clientId, $hashedPassword);
+        
+        // Check and report the password change status
+        if ($pswdResult) {
+            $clientData = getClient($_SESSION['clientData']['clientEmail']);
+            array_pop($clientData);
+            // Store the array into the session
+            $_SESSION['clientData'] = $clientData;
+            $message = "<p id='message'>$clientData[clientFirstname] $clientData[clientLastname] your password was updated successfully.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /acme/accounts/');
+            exit;
+        } else {
+             // get original client info so preceding form remains filled in;
+            $clientInfo = getClientInfo($_SESSION['clientData']['clientId']);
+            if(count($clientInfo)<1){
+             $upmessage = 'Sorry, account information could not be found.';
+            }
+            $pmessage = "<p id='pmessage'>Sorry, system failed to update your password. Please try again.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
         break;
     default:
         include '../view/admin.php';
