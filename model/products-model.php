@@ -126,3 +126,62 @@ function deleteProduct($invId) {
     // Return the indication of success (rows changed)
     return $rowsChanged;
 }
+
+function getProductsByCategory($type){
+ $db = acmeConnect();
+ $sql = 'SELECT * FROM inventory WHERE categoryId IN (SELECT categoryId FROM categories WHERE categoryName = :catType)';
+ $stmt = $db->prepare($sql);
+ $stmt->bindValue(':catType', $type, PDO::PARAM_STR);
+ $stmt->execute();
+ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ $stmt->closeCursor();
+ return $products;
+}
+
+function getProductById($id){
+    $db = acmeConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $product;
+}
+
+function buildProductsDisplay($products){
+ $pd = '<ul id="prod-display">';
+ foreach ($products as $product) {
+  $pd .= '<li>';
+  $pd .= "<a href='/acme/products/?action=product&id=$product[invId]' title='View our $product[invName] product'><img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'></a>";
+  $pd .= '<hr>';
+  $pd .= "<h2><a href='/acme/products/?action=product&id=$product[invId]' title='View our $product[invName] product'>$product[invName]</a></h2>";
+  $pd .= "<span>$$product[invPrice]</span>";
+  $pd .= '</li>';
+ }
+ $pd .= '</ul>';
+ return $pd;
+}
+
+function buildProdDisplay($product){
+    $pd = '<div id="prod-wrapper">';
+    $pd .= "<img src='$product[invImage]' alt='Image of $product[invName] on Acme.com' id='prodImg'>";
+    $pd .= '<ul id="prod-info">';
+    //$pd .= "<li><h2>$product[invName]</h2></li>";
+    $pd .= "<li>Made by $product[invVendor]<hr></li>";
+    $pd .= "<li id='price'>Price: $$product[invPrice]</li>";
+    if ($product['invStock']) {
+        $pd .= "<li id='inStock'>$product[invStock] left in stock</li>";
+    } else {
+        $pd .= "<li id='outOfStock'>Sorry this item is currently out of stock</li>";
+    }
+    $pd .= "<li>$product[invDescription]</li>";
+    $pd .= '<li><ul id="prod-details">';
+    $pd .= "<li>$product[invSize] in<sup>3</sup></li>";
+    $pd .= "<li>Weighs $product[invWeight] lbs</li>";
+    $pd .= "<li>Made of $product[invStyle]</li>";
+    $pd .= "<li>Made in $product[invLocation]</li>";
+    $pd .= '</ul></li>';
+    $pd .= '</ul></div>';
+ return $pd;
+}

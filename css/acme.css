@@ -332,16 +332,9 @@ figcaption {
 
 }
 
-.price {
-    margin: 10px 10px 0 auto;
-    color: #de2226;
-    font-size: 2em;
-}
-
 #price {
-    margin: 10px 0 0 0;
     color: #de2226;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .acctConf {
@@ -413,6 +406,53 @@ footer {
 p {
     margin: 0px 15px;
     padding: 0px;
+}
+
+#prod-display {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#prod-display li {
+    margin-bottom: .5em;
+    border: 1px #ccc solid;
+    list-style-type: none;
+    flex: 1 1 auto;
+}
+
+#prod-display li img {
+    width: 100%;
+    height: 200px;
+}
+
+#prod-display hr {
+    margin: auto;
+    border-color: lightgray;
+    border-style: solid;
+}
+
+#prodImg {
+    max-width: 100%;
+}
+
+#prod-info {
+    padding: 10px;
+}
+
+#prod-details {
+    list-style: square;
+    padding: 10px 0 10px 10px;
+    margin-left: 10px;
+}
+
+#inStock {
+    color: green;
+}
+
+#outOfStock {
+    color: #de2226;
 }
 
 @media only screen and (min-width: 775px) {
@@ -508,6 +548,41 @@ p {
 
     form {
         width: 50%;
+    }
+
+    #prod-display {
+        flex-flow: row wrap;
+        justify-content: flex-start;
+    }
+    #prod-display li {
+        max-width: 200px;
+        flex: 1 0 auto;
+        text-align: center;
+        max-height: 400px;
+    }
+
+    #prod-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
+
+    #prodImg {
+        max-width: 50%;
+        margin-left: 10px;
+    }
+
+    #prod-info {
+        width: 40%;
+        padding-top: 0;
+    }
+
+    #prod-info li {
+        margin: 10px;
+    }
+
+    #prod-details {
+        margin: 0;
     }
 
 

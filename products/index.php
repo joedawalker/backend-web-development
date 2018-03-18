@@ -177,6 +177,33 @@ switch ($action){
         }
         
         break;
+        
+    case 'category':
+        
+        $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
+        $products = getProductsByCategory($type);
+        if(!count($products)){
+         $message = "<p class='notice'>Sorry, no $type products could be found.</p>";
+        } else {
+         $prodDisplay = buildProductsDisplay($products);
+        }
+        
+        include '../view/category.php';
+       
+        break;
+    case 'product':
+        
+        $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $product = getProductById($id);
+        if(empty($product)){
+            $message = "<p class='notice'>Sorry, the $product[invName] product could not be found.</p>";
+            include '../view/product-detail.php';
+        } else {
+            $prodDisplay = buildProdDisplay($product);
+            include '../view/product-detail.php';
+        }
+        
+        break;
     default:
         $products = getProductBasics();
         
